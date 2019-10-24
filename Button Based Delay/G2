@@ -1,7 +1,6 @@
 
 #include <msp430.h>
 
-//note while this is for the g2 it strongly resembles the 6989
 
 
 long frequency;                               initilizing variables
@@ -19,7 +18,7 @@ void main(void)
     frequency = 0;                              //initialize frequency variable
 
     P1IE  |= BIT3;                              //enable interrupt on P1.3
-    P1IES |= BIT3;                              //Hi/Lo edge triggered
+    P1IES |= BIT3;                              //edge triggered
     P1REN |= BIT3;                              //enable pull up resistor
     P1OUT |= BIT3;                              //turn on pin
     P1IFG &= ~BIT3;                             //clear interrupt flag
@@ -62,6 +61,6 @@ __interrupt void Port_1(void)                       //interrupt name
         end = TA0R;                                 //end gets time button was released
         reset = 1;                                  //set reset to 1
     }
-    P1IES ^= BIT3;                                  //Lo/Hi edge triggered
+    P1IES ^= BIT3;                                  // edge triggered
     P1IFG &= ~BIT3;                                 //reset interrupt flag
 }
